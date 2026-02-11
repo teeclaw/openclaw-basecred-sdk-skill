@@ -5,6 +5,10 @@ author: teeclaw
 license: MIT
 description: Check human reputation via Ethos Network, Talent Protocol, and Farcaster using the neutral basecred-sdk. Fetches composable reputation data without judgment - raw scores, levels, and signals for identity verification and trust assessment. Use when you need to check someone's onchain credibility, builder/creator scores, or Farcaster quality metrics.
 tags: [reputation, identity, ethos, talent, farcaster, basecred, onchain, verification]
+metadata:
+  openclaw:
+    requires:
+      bins: [node]
 ---
 
 # basecred-sdk-skill
