@@ -12,6 +12,10 @@ All notable changes to openclaw-basecred-sdk will be documented in this file.
 - **FIXED:** Hardcoded `/home/phan_harry/` paths replaced with `~/` in all documentation
 - **ROTATED:** All exposed API keys (Talent Protocol, Neynar)
 
+#### Schema Fix
+- **FIXED:** `--full` output now returns correct schema (unwrapped profile object)
+- Schema now matches documented spec: `{ identity, availability, ethos, talent, farcaster, recency }`
+
 #### Incident Summary
 - API keys were accidentally included in documentation files
 - Exposed on GitHub and ClawHub v1.0.3 for ~3 hours (2026-02-11 04:00-07:00 UTC)

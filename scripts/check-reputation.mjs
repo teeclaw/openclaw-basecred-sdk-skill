@@ -73,7 +73,7 @@ NOTE:
     // Determine output format
     let output;
     if (flags.full) {
-      output = result; // Full profile
+      output = result.profile; // Full profile (unwrap from result)
     } else {
       output = getSummary(result); // Summary (default)
     }
