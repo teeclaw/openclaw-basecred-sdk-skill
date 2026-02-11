@@ -7,14 +7,19 @@ This skill uses **secure, hardcoded .env loading** — NOT directory traversal.
 ### Implementation
 
 ```javascript
-// scripts/lib/basecred.mjs line 13
-dotenv.config({ path: '/home/phan_harry/.openclaw/.env' });
+// scripts/lib/basecred.mjs
+import { homedir } from 'os';
+import { join } from 'path';
+
+const openclawEnvPath = join(homedir(), '.openclaw', '.env');
+dotenv.config({ path: openclawEnvPath });
 ```
 
 **Why this is secure:**
 
-- Path is **hardcoded** to the OpenClaw credentials directory
+- Path is **dynamically constructed** from user's home directory (portable across users)
 - No upward directory traversal (no risk of reading unrelated .env files)
+- Resolves to `~/.openclaw/.env` for the current user (respects OpenClaw standard)
 - Credentials are loaded from the centralized, permission-restricted `.env` (mode 600)
 - Script runs in skill context with read-only access to credentials
 
@@ -56,8 +61,9 @@ Declared in `skill.json` manifest:
 ## Data Flow
 
 1. User invokes `check-reputation.mjs <address>`
-2. Script loads credentials from `/home/phan_harry/.openclaw/.env`
-3. Credentials passed to `@basecred/sdk` config builder
+2. Script dynamically resolves `.env` path: `${homedir()}/.openclaw/.env`
+3. Credentials loaded from user's OpenClaw directory (portable across users)
+4. Credentials passed to `@basecred/sdk` config builder
 4. SDK makes HTTP requests to:
    - `https://api.ethos.network` (no auth)
    - `https://api.talentprotocol.com` (if TALENT_API_KEY present)
@@ -80,10 +86,11 @@ This skill is **isolated by design:**
 
 **Risks mitigated:**
 
-- ✅ Credential leakage → Hardcoded path prevents reading wrong .env
-- ✅ Directory traversal → No upward path resolution
+- ✅ Credential leakage → Dynamic path resolves to user's `.openclaw/.env` only
+- ✅ Directory traversal → No upward path resolution (direct `join()` construction)
 - ✅ Dependency injection → Locked to @basecred/sdk@0.6.2
 - ✅ API key exposure → Keys never logged or written to disk
+- ✅ Non-portability → Works for any user (not hardcoded to specific username)
 
 **Residual risks:**
 

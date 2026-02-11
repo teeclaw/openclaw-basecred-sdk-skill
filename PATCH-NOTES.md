@@ -1,7 +1,7 @@
 # Security Patch Notes
 
 **Date:** 2026-02-11  
-**Patch Version:** 1.0.1 → 1.0.2 (security hardening)
+**Patch Version:** 1.0.1 → 1.0.2 (security hardening + portability fix)
 
 ## Changes Applied
 
@@ -46,7 +46,27 @@
 
 ---
 
-### 4. ✅ Enhanced SKILL.md with Security Section
+### 4. ✅ Portability Fix: Dynamic User Home Resolution
+
+**Issue:** Hardcoded path `/home/phan_harry/.openclaw/.env` was user-specific — skill would fail for anyone not named "phan_harry".
+
+**Fix:** Replaced hardcoded path with dynamic resolution:
+```javascript
+import { homedir } from 'os';
+import { join } from 'path';
+
+const openclawEnvPath = join(homedir(), '.openclaw', '.env');
+dotenv.config({ path: openclawEnvPath });
+```
+
+**Impact:** 
+- Skill now works for ANY OpenClaw user (portable across installations)
+- Still secure: no directory traversal, resolves directly to `~/.openclaw/.env`
+- Respects OpenClaw standard credential location
+
+---
+
+### 5. ✅ Enhanced SKILL.md with Security Section
 
 **Issue:** No upfront security guidance for users.
 
@@ -63,9 +83,10 @@
 
 ### Original Audit Concerns
 
-1. **Directory traversal for .env loading** → ❌ FALSE (uses hardcoded path)
+1. **Directory traversal for .env loading** → ❌ FALSE (initially used hardcoded path, now dynamic but secure)
 2. **Missing credential declarations** → ✅ FIXED (added to skill.json + SKILL.md)
 3. **Upstream dependency risk** → ✅ AUDITED (clean, MIT licensed, minimal deps)
+4. **Non-portability** → ✅ FIXED (hardcoded username replaced with `homedir()` resolution)
 
 ### Residual Risks
 
@@ -82,8 +103,8 @@ Before using in production:
 1. **Verify .env loading:**
    ```bash
    cd /home/phan_harry/.openclaw/workspace/skills/basecred-sdk-skill
-   grep "dotenv.config" scripts/lib/basecred.mjs
-   # Should show hardcoded path: /home/phan_harry/.openclaw/.env
+   grep "homedir()" scripts/lib/basecred.mjs
+   # Should show dynamic resolution: join(homedir(), '.openclaw', '.env')
    ```
 
 2. **Test with minimal credentials:**

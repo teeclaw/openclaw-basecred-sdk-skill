@@ -6,14 +6,12 @@ echo "🧪 basecred-sdk-skill Isolation Test"
 echo "====================================="
 echo ""
 
-# Test 1: Verify hardcoded path in source
-echo "✓ Test 1: Verify hardcoded .env path"
-HARDCODED_PATH=$(grep -n "dotenv.config" scripts/lib/basecred.mjs | grep -o '/[^'"'"']*\.env')
-echo "  Found path: $HARDCODED_PATH"
-if [ "$HARDCODED_PATH" = "/home/phan_harry/.openclaw/.env" ]; then
-  echo "  ✅ PASS: Path is hardcoded (no directory traversal)"
+# Test 1: Verify dynamic .env path resolution
+echo "✓ Test 1: Verify dynamic .env path (user-agnostic)"
+if grep -q "homedir()" scripts/lib/basecred.mjs && grep -q "join(homedir(), '.openclaw', '.env')" scripts/lib/basecred.mjs; then
+  echo "  ✅ PASS: Uses homedir() for portable path resolution"
 else
-  echo "  ❌ FAIL: Unexpected path"
+  echo "  ❌ FAIL: Not using dynamic home directory resolution"
   exit 1
 fi
 echo ""
@@ -73,8 +71,8 @@ echo "======================================"
 echo "🎉 All isolation tests passed!"
 echo ""
 echo "Security guarantees verified:"
-echo "  ✅ Hardcoded .env path (no traversal)"
-echo "  ✅ No upward directory resolution"
+echo "  ✅ Dynamic user home resolution (portable)"
+echo "  ✅ No upward directory traversal"
 echo "  ✅ Upstream package verified"
 echo "  ✅ Minimal dependency footprint"
 echo "  ✅ Functional execution"

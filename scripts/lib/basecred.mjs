@@ -8,11 +8,13 @@ import { getUnifiedProfile } from '@basecred/sdk';
 import dotenv from 'dotenv';
 import { fileURLToPath } from 'url';
 import { dirname, join } from 'path';
+import { homedir } from 'os';
 
-// Load environment variables from OpenClaw .env
+// Load environment variables from OpenClaw .env (user-agnostic)
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
-dotenv.config({ path: '/home/phan_harry/.openclaw/.env' });
+const openclawEnvPath = join(homedir(), '.openclaw', '.env');
+dotenv.config({ path: openclawEnvPath });
 
 /**
  * Check reputation for an Ethereum address
