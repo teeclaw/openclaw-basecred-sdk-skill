@@ -1,6 +1,15 @@
 # Changelog
 
-All notable changes to basecred-sdk-skill will be documented in this file.
+All notable changes to openclaw-basecred-sdk will be documented in this file.
+
+## [1.0.3] - 2026-02-11
+
+### Package Rename
+- **Renamed:** `basecred-sdk-skill` → `openclaw-basecred-sdk` for consistency
+- **Updated:** package.json name and repository URL
+- **Published:** To ClawHub with updated slug
+
+No functional changes from v1.0.2.
 
 ## [1.0.2] - 2026-02-11
 
