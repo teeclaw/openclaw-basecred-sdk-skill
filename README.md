@@ -1,10 +1,10 @@
-# basecred-sdk-skill
+# openclaw-basecred-sdk
 
 **OpenClaw skill for checking human reputation via Ethos Network, Talent Protocol, and Farcaster.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security: Audited](https://img.shields.io/badge/Security-Audited-green.svg)](./SECURITY.md)
-[![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-blue.svg)](./CHANGELOG.md)
+[![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-blue.svg)](./CHANGELOG.md)
 
 ## 🔐 Security Status
 
@@ -183,6 +183,12 @@ This skill underwent comprehensive security review and hardening:
 
 ## Version History
 
+### v1.0.3 (2026-02-11) - Package Rename
+- 📦 Renamed package: `basecred-sdk-skill` → `openclaw-basecred-sdk`
+- ✅ Updated package.json name and repository URL
+- ✅ Published to ClawHub with updated slug
+- No functional changes from v1.0.2
+
 ### v1.0.2 (2026-02-11) - Security Hardening + Portability Fix
 - 🔐 Security audit completed and documented
 - 🔴 **CRITICAL FIX:** Non-portable hardcoded user path
@@ -210,7 +216,7 @@ Source repository: https://github.com/Callmedas69/basecred/tree/main/packages/sd
 ## Contributing
 
 Security issues? Please review [SECURITY.md](./SECURITY.md) first, then report via:
-- GitHub Issues: https://github.com/Callmedas69/basecred/issues
+- GitHub Issues: https://github.com/teeclaw/openclaw-basecred-sdk-skill/issues
 - Contact: teeclaw
 
 ## License
