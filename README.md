@@ -3,6 +3,22 @@
 **OpenClaw skill for checking human reputation via Ethos Network, Talent Protocol, and Farcaster.**
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Security: Audited](https://img.shields.io/badge/Security-Audited-green.svg)](./SECURITY.md)
+[![Version: 1.0.2](https://img.shields.io/badge/Version-1.0.2-blue.svg)](./CHANGELOG.md)
+
+## 🔐 Security Status
+
+**Audited:** 2026-02-11 ✅
+
+- ✅ Upstream dependency verified (`@basecred/sdk@0.6.2` - MIT licensed, minimal deps)
+- ✅ Secure credential loading (no directory traversal)
+- ✅ Portable across users (dynamic home directory resolution)
+- ✅ Read-only API access (public reputation data only)
+- ✅ No secrets logged or written to disk
+
+**See:** [SECURITY.md](./SECURITY.md) for full audit details | [PATCH-NOTES.md](./PATCH-NOTES.md) for fixes applied
+
+---
 
 ## Quick Start
 
@@ -96,6 +112,48 @@ Get keys:
 ./scripts/check-reputation.mjs --help
 ```
 
+## Security & Audit
+
+### 🔍 Security Audit (2026-02-11)
+
+This skill underwent comprehensive security review and hardening:
+
+| Aspect | Status | Details |
+|--------|--------|---------|
+| **Upstream Package** | ✅ VERIFIED | `@basecred/sdk@0.6.2` - MIT, 2 deps, clean code |
+| **Credential Loading** | ✅ SECURE | `os.homedir()` + `path.join()` (no traversal) |
+| **Portability** | ✅ FIXED | Dynamic user resolution (was hardcoded) |
+| **Attack Surface** | ✅ MINIMAL | Read-only API, no disk writes, no secret logs |
+| **Directory Traversal** | ✅ FALSE CLAIM | Direct path construction (audit was wrong) |
+| **Isolation Tests** | ✅ PASSING | 5 automated security checks |
+
+**Original audit concern (resolved):**
+- ❌ **Claimed:** "Script walks up directories to find .env" 
+- ✅ **Reality:** Direct path construction to `~/.openclaw/.env` (no traversal)
+- ✅ **Fixed:** Initially hardcoded to `/home/phan_harry/...`, now dynamic for all users
+
+### 🛡️ Security Guarantees
+
+- **Credential isolation:** Only reads from `~/.openclaw/.env` (mode 600)
+- **No traversal:** Direct `join(homedir(), '.openclaw', '.env')` construction
+- **Pinned dependencies:** Locked to audited `@basecred/sdk@0.6.2`
+- **Read-only access:** Only fetches public reputation data (no writes)
+- **Graceful errors:** Never exposes secrets in error messages
+
+### 📋 Audit Documentation
+
+- [SECURITY.md](./SECURITY.md) - Full security documentation
+- [PATCH-NOTES.md](./PATCH-NOTES.md) - Security fixes applied
+- [PORTABILITY-FIX.md](./PORTABILITY-FIX.md) - Critical path fix details
+- [test-isolation.sh](./test-isolation.sh) - Automated security tests
+
+**Run security tests:**
+```bash
+./test-isolation.sh
+```
+
+---
+
 ## Features
 
 - ✅ Graceful degradation (works with partial data)
@@ -104,6 +162,8 @@ Get keys:
 - ✅ Summary and full profile modes
 - ✅ Semantic levels (Novice → Master, etc.)
 - ✅ Recency buckets (recent/stale/dormant)
+- ✅ Portable across users (v1.0.2+)
+- ✅ Security audited (2026-02-11)
 
 ## What This Does NOT Do
 
@@ -115,13 +175,43 @@ Get keys:
 
 ## Documentation
 
-See [SKILL.md](SKILL.md) for complete documentation.
+- **[SKILL.md](SKILL.md)** - Complete usage documentation
+- **[SECURITY.md](SECURITY.md)** - Security audit and guarantees
+- **[CHANGELOG.md](CHANGELOG.md)** - Version history
+- **[PATCH-NOTES.md](PATCH-NOTES.md)** - Security hardening details
+- **[PORTABILITY-FIX.md](PORTABILITY-FIX.md)** - Critical path fix incident report
+
+## Version History
+
+### v1.0.2 (2026-02-11) - Security Hardening + Portability Fix
+- 🔐 Security audit completed and documented
+- 🔴 **CRITICAL FIX:** Non-portable hardcoded user path
+- ✅ Dynamic home directory resolution (works for any user)
+- ✅ Comprehensive security documentation
+- ✅ Automated isolation test suite
+
+### v1.0.1 (2026-02-10) - SDK Update
+- Updated `@basecred/sdk` from v0.6.1 to v0.6.2
+- Fixed Farcaster decimal precision (0.43 instead of 0)
+
+### v1.0.0 (2026-02-10) - Initial Release
+- CLI interface for Ethos, Talent Protocol, Farcaster
+- Summary and full profile modes
+- JSON and human-readable output
+
+See [CHANGELOG.md](./CHANGELOG.md) for detailed version history.
 
 ## Source SDK
 
 This skill wraps [@basecred/sdk](https://www.npmjs.com/package/@basecred/sdk).
 
 Source repository: https://github.com/Callmedas69/basecred/tree/main/packages/sdk
+
+## Contributing
+
+Security issues? Please review [SECURITY.md](./SECURITY.md) first, then report via:
+- GitHub Issues: https://github.com/Callmedas69/basecred/issues
+- Contact: teeclaw
 
 ## License
 
@@ -130,3 +220,5 @@ MIT
 ## Author
 
 Built by **teeclaw** for OpenClaw.
+
+**Audited:** 2026-02-11 by 0xdas & Mr. Tee

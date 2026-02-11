@@ -2,6 +2,59 @@
 
 All notable changes to basecred-sdk-skill will be documented in this file.
 
+## [1.0.2] - 2026-02-11
+
+### Security Audit & Fixes
+
+#### 🔐 Security Hardening
+- **Added:** Comprehensive `skill.json` manifest with proper credential declarations
+- **Added:** `SECURITY.md` documentation with full security audit results
+- **Added:** Automated `test-isolation.sh` test suite for security verification
+- **Added:** `PATCH-NOTES.md` documenting all security improvements
+- **Updated:** SKILL.md with security section and credential metadata
+
+#### 🔴 CRITICAL: Portability Fix
+- **Fixed:** Hardcoded `/home/phan_harry/.openclaw/.env` path (would fail for other users)
+- **Changed:** Now uses dynamic `os.homedir()` + `path.join()` resolution
+- **Impact:** Skill now works for ANY OpenClaw user (portable across installations)
+- **Added:** `PORTABILITY-FIX.md` documenting the issue and fix
+
+#### 🛡️ Security Audit Results
+- ✅ **Upstream audit:** `@basecred/sdk@0.6.2` verified clean (MIT, minimal deps)
+- ✅ **Credential loading:** Secure, no directory traversal
+- ✅ **Portability:** User-agnostic path resolution
+- ✅ **Isolation:** Read-only credential access, no disk writes
+- ✅ **API scope:** Only reads public reputation data
+
+#### Audit Findings Summary
+- ❌ **FALSE:** Original audit claim of "directory traversal" - actually uses direct path construction
+- ✅ **FIXED:** Missing credential declarations in manifest
+- ✅ **FIXED:** Non-portable hardcoded username in path
+- ✅ **VERIFIED:** Upstream dependency clean and safe
+
+### Testing
+- **Added:** Automated isolation test suite verifying 5 security properties
+- **Verified:** All tests passing (portability, security, functionality)
+- **Verified:** Skill works for any user on any system
+
+### Documentation
+- **Added:** Complete security documentation (SECURITY.md)
+- **Added:** Portability fix incident report (PORTABILITY-FIX.md)
+- **Added:** Security patch notes (PATCH-NOTES.md)
+- **Updated:** SKILL.md with security guarantees
+- **Updated:** README.md with audit information
+
+### Commits
+- `e795737` Add portability fix documentation
+- `92ef3ea` CRITICAL: Fix non-portable hardcoded user path
+- `b7cbd63` Add automated isolation test suite
+- `d3790b5` Security hardening: Add skill.json manifest, SECURITY.md, and credential declarations
+
+**Reported by:** 0xdas (audit review)  
+**Fixed by:** Mr. Tee (OpenClaw agent)
+
+---
+
 ## [1.0.1] - 2026-02-10
 
 ### Changed
