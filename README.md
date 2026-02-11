@@ -45,6 +45,7 @@ Returns raw scores, levels, and signals—**no rankings, no judgments**.
 
 ## Example Output
 
+### Summary (default)
 ```json
 {
   "address": "0xd8dA6BF26964aF9D7eEd9e03E53415D37aA96045",
@@ -68,6 +69,94 @@ Returns raw scores, levels, and signals—**no rankings, no judgments**.
     }
   },
   "recency": "recent"
+}
+```
+
+### Full Profile (`--full`)
+```json
+{
+  "identity": {
+    "address": "0x168D8b4f50BB3aA67D05a6937B643004257118ED"
+  },
+  "availability": {
+    "ethos": "available",
+    "talent": "available",
+    "farcaster": "available"
+  },
+  "ethos": {
+    "data": {
+      "score": 1284,
+      "credibilityLevel": {
+        "value": 1284,
+        "level": "Neutral",
+        "levelSource": "sdk",
+        "levelPolicy": "ethos@v1"
+      },
+      "vouchesReceived": 0,
+      "reviews": { "positive": 7, "neutral": 0, "negative": 0 }
+    },
+    "signals": {
+      "hasNegativeReviews": false,
+      "hasVouches": false
+    },
+    "meta": {
+      "firstSeenAt": "2025-10-05T09:58:11.000Z",
+      "lastUpdatedAt": "2025-10-05T09:58:12.000Z",
+      "activeSinceDays": 128,
+      "lastUpdatedDaysAgo": 128
+    }
+  },
+  "talent": {
+    "data": {
+      "builderScore": 161,
+      "builderLevel": {
+        "value": 161,
+        "level": "Advanced",
+        "levelSource": "sdk",
+        "levelPolicy": "builder@v1"
+      },
+      "builderRankPosition": 641,
+      "creatorScore": 66,
+      "creatorLevel": {
+        "value": 66,
+        "level": "Growing",
+        "levelSource": "sdk",
+        "levelPolicy": "creator@v1"
+      }
+    },
+    "signals": {
+      "verifiedBuilder": true,
+      "verifiedCreator": true
+    },
+    "meta": {
+      "lastUpdatedAt": "2026-02-05T03:24:55Z",
+      "lastUpdatedDaysAgo": 6
+    }
+  },
+  "farcaster": {
+    "data": {
+      "userScore": 0.98
+    },
+    "signals": {
+      "passesQualityThreshold": true
+    },
+    "meta": {
+      "source": "neynar",
+      "scope": "farcaster",
+      "lastUpdatedAt": "2026-02-11T07:20:00.000Z",
+      "lastUpdatedDaysAgo": 0,
+      "updateCadence": "weekly",
+      "timeMeaning": "system_update"
+    }
+  },
+  "recency": {
+    "bucket": "recent",
+    "windowDays": 30,
+    "lastUpdatedDaysAgo": 0,
+    "derivedFrom": ["ethos", "talent", "farcaster"],
+    "computedAt": "2026-02-11T07:20:00.000Z",
+    "policy": "recency@v1"
+  }
 }
 ```
 
@@ -183,12 +272,14 @@ This skill underwent comprehensive security review and hardening:
 
 ## Version History
 
-### v1.0.4 (2026-02-11) - Security Incident & Cleanup
+### v1.0.4 (2026-02-11) - Security Incident & Cleanup + Schema Fix
 - 🚨 **SECURITY FIX:** Removed files with leaked API keys from repo and git history
 - ✅ Git history scrubbed (13 commits rewritten, force-pushed)
 - ✅ All exposed API keys rotated (Talent Protocol, Neynar)
 - ✅ Fixed hardcoded paths in documentation (`/home/phan_harry/` → `~/`)
 - ✅ Removed `BUILD-SUMMARY.md` and `AUDIT-SUMMARY.md`
+- 🔧 **SCHEMA FIX:** `--full` output now returns correct schema (unwrapped profile object)
+- ✅ Full profile schema: `{ identity, availability, ethos, talent, farcaster, recency }`
 
 ### v1.0.3 (2026-02-11) - Package Rename
 - 📦 Renamed package: `basecred-sdk-skill` → `openclaw-basecred-sdk`
