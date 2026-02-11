@@ -77,7 +77,7 @@ Declared in `skill.json` manifest:
 
 This skill is **isolated by design:**
 
-- Runs in its own directory (`/home/phan_harry/.openclaw/workspace/skills/basecred-sdk-skill`)
+- Runs in its own directory (`~/.openclaw/workspace/skills/openclaw-basecred-sdk`)
 - No access to sibling skill directories
 - No write access to OpenClaw system files
 - No ability to modify credentials or config

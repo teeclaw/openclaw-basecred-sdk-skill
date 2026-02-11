@@ -30,7 +30,7 @@ The SDK is designed to make reputation data **observable without turning it into
 **This skill uses secure, hardcoded credential loading** — see [SECURITY.md](./SECURITY.md) for full audit details.
 
 **TL;DR:**
-- ✅ Credentials loaded from `/home/phan_harry/.openclaw/.env` (hardcoded path, no directory traversal)
+- ✅ Credentials loaded from `~/.openclaw/.env` (hardcoded path, no directory traversal)
 - ✅ Upstream package `@basecred/sdk@0.6.2` audited and clean (MIT licensed, minimal deps)
 - ✅ No secrets logged or written to disk
 - ✅ Read-only API access (public reputation data)
@@ -44,7 +44,7 @@ The SDK is designed to make reputation data **observable without turning it into
 
 ### Optional API Keys
 
-**Environment variables** (in `/home/phan_harry/.openclaw/.env`):
+**Environment variables** (in `~/.openclaw/.env`):
 
 ```bash
 # Optional: Enables Talent Protocol builder/creator scores
@@ -67,7 +67,7 @@ NEYNAR_API_KEY=your_neynar_api_key
 ## Installation
 
 ```bash
-cd /home/phan_harry/.openclaw/workspace/skills/basecred-sdk-skill
+cd ~/.openclaw/workspace/skills/openclaw-basecred-sdk
 npm install
 ```
 
@@ -353,11 +353,11 @@ This skill intentionally does **NOT**:
 ## Troubleshooting
 
 **"TALENT_API_KEY not found" warning:**
-- Add `TALENT_API_KEY=xxx` to `/home/phan_harry/.openclaw/.env`
+- Add `TALENT_API_KEY=xxx` to `~/.openclaw/.env`
 - Or accept that Talent scores will be unavailable
 
 **"NEYNAR_API_KEY not found" warning:**
-- Add `NEYNAR_API_KEY=xxx` to `/home/phan_harry/.openclaw/.env`
+- Add `NEYNAR_API_KEY=xxx` to `~/.openclaw/.env`
 - Or accept that Farcaster scores will be unavailable
 
 **All sources return `not_found`:**
