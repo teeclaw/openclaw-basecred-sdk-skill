@@ -1,38 +1,10 @@
 ---
-name: basecred-sdk-skill
+name: openclaw-basecred-sdk
+version: 1.0.2
+author: teeclaw
+license: MIT
 description: Check human reputation via Ethos Network, Talent Protocol, and Farcaster using the neutral basecred-sdk. Fetches composable reputation data without judgment - raw scores, levels, and signals for identity verification and trust assessment. Use when you need to check someone's onchain credibility, builder/creator scores, or Farcaster quality metrics.
-metadata:
-  {
-    "openclaw":
-      {
-        "requires": { "bins": ["node"] },
-        "credentials":
-          {
-            "optional":
-              [
-                {
-                  "key": "TALENT_API_KEY",
-                  "description": "Talent Protocol API key (enables builder/creator scores)",
-                  "url": "https://talentprotocol.com",
-                },
-                {
-                  "key": "NEYNAR_API_KEY",
-                  "description": "Neynar API key (enables Farcaster quality scores)",
-                  "url": "https://neynar.com",
-                },
-              ],
-          },
-        "install":
-          [
-            {
-              "id": "node",
-              "kind": "node",
-              "package": "@basecred/sdk",
-              "label": "Install basecred SDK (npm)",
-            },
-          ],
-      },
-  }
+tags: [reputation, identity, ethos, talent, farcaster, basecred, onchain, verification]
 ---
 
 # basecred-sdk-skill

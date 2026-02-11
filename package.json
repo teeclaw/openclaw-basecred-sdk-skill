@@ -1,6 +1,6 @@
 {
   "name": "basecred-sdk-skill",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "OpenClaw skill for checking human reputation via Ethos Network, Talent Protocol, and Farcaster using the neutral basecred-sdk",
   "type": "module",
   "main": "scripts/lib/basecred.mjs",
