@@ -6,6 +6,22 @@ metadata:
     "openclaw":
       {
         "requires": { "bins": ["node"] },
+        "credentials":
+          {
+            "optional":
+              [
+                {
+                  "key": "TALENT_API_KEY",
+                  "description": "Talent Protocol API key (enables builder/creator scores)",
+                  "url": "https://talentprotocol.com",
+                },
+                {
+                  "key": "NEYNAR_API_KEY",
+                  "description": "Neynar API key (enables Farcaster quality scores)",
+                  "url": "https://neynar.com",
+                },
+              ],
+          },
         "install":
           [
             {
@@ -32,6 +48,16 @@ This skill provides a CLI interface to the [@basecred/sdk](https://www.npmjs.com
 - **Farcaster (Neynar)** - Account quality metrics
 
 The SDK is designed to make reputation data **observable without turning it into judgment**. It returns raw scores, levels, and signals—no rankings, no percentiles, no trust verdicts.
+
+## Security
+
+**This skill uses secure, hardcoded credential loading** — see [SECURITY.md](./SECURITY.md) for full audit details.
+
+**TL;DR:**
+- ✅ Credentials loaded from `/home/phan_harry/.openclaw/.env` (hardcoded path, no directory traversal)
+- ✅ Upstream package `@basecred/sdk@0.6.2` audited and clean (MIT licensed, minimal deps)
+- ✅ No secrets logged or written to disk
+- ✅ Read-only API access (public reputation data)
 
 ## Prerequisites
 
