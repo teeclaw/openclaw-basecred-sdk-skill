@@ -2,6 +2,31 @@
 
 All notable changes to openclaw-basecred-sdk will be documented in this file.
 
+## [1.0.4] - 2026-02-11
+
+### 🚨 SECURITY INCIDENT & CLEANUP
+
+#### Critical Security Fix
+- **REMOVED:** `BUILD-SUMMARY.md` and `AUDIT-SUMMARY.md` files containing leaked API keys
+- **SCRUBBED:** Git history to remove all traces of exposed credentials (13 commits rewritten)
+- **FIXED:** Hardcoded `/home/phan_harry/` paths replaced with `~/` in all documentation
+- **ROTATED:** All exposed API keys (Talent Protocol, Neynar)
+
+#### Incident Summary
+- API keys were accidentally included in documentation files
+- Exposed on GitHub and ClawHub v1.0.3 for ~3 hours (2026-02-11 04:00-07:00 UTC)
+- Git history completely cleaned using `git filter-branch`
+- All affected credentials rotated
+- No evidence of unauthorized use
+
+#### Documentation Updates
+- Updated `SKILL.md` to use portable paths (`~/.openclaw/`)
+- Updated `SECURITY.md` to remove user-specific paths
+- Removed all placeholder keys from documentation
+
+**Reported by:** ClawHub security review  
+**Fixed by:** Mr. Tee & 0xdas
+
 ## [1.0.3] - 2026-02-11
 
 ### Package Rename

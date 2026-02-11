@@ -4,7 +4,7 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Security: Audited](https://img.shields.io/badge/Security-Audited-green.svg)](./SECURITY.md)
-[![Version: 1.0.3](https://img.shields.io/badge/Version-1.0.3-blue.svg)](./CHANGELOG.md)
+[![Version: 1.0.4](https://img.shields.io/badge/Version-1.0.4-blue.svg)](./CHANGELOG.md)
 
 ## 🔐 Security Status
 
@@ -182,6 +182,13 @@ This skill underwent comprehensive security review and hardening:
 - **[PORTABILITY-FIX.md](PORTABILITY-FIX.md)** - Critical path fix incident report
 
 ## Version History
+
+### v1.0.4 (2026-02-11) - Security Incident & Cleanup
+- 🚨 **SECURITY FIX:** Removed files with leaked API keys from repo and git history
+- ✅ Git history scrubbed (13 commits rewritten, force-pushed)
+- ✅ All exposed API keys rotated (Talent Protocol, Neynar)
+- ✅ Fixed hardcoded paths in documentation (`/home/phan_harry/` → `~/`)
+- ✅ Removed `BUILD-SUMMARY.md` and `AUDIT-SUMMARY.md`
 
 ### v1.0.3 (2026-02-11) - Package Rename
 - 📦 Renamed package: `basecred-sdk-skill` → `openclaw-basecred-sdk`
